@@ -1,6 +1,8 @@
 {
   "edit-menu": {
-    "title": "Edit - %key"
+    "title": "Edit - %key",
+
+    "rename": "<aqua><bold>Rename Voucher"
   },
 
   "create-command": {

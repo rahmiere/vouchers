@@ -35,10 +35,6 @@ public final class EditMenu extends Menu {
 
     private final Voucher voucher;
 
-    private static final ItemStack RENAME_ITEM = PaperItemBuilder.ofType(Material.NAME_TAG)
-            .name(Component.text("Rename Voucher").color(NamedTextColor.AQUA).decorate(TextDecoration.BOLD))
-            .build();
-
     @Inject
     public EditMenu(Language language, RenameListener listener, @Assisted Voucher voucher) {
         this.language = language;
@@ -57,7 +53,11 @@ public final class EditMenu extends Menu {
     }
 
     private ItemStackElement<ChestPane> renameElement() {
-        return ItemStackElement.of(RENAME_ITEM, this::renameClick);
+        final ItemStack item = PaperItemBuilder.ofType(Material.NAME_TAG)
+                .name(language.get(LangKey.EDIT_MENU_RENAME))
+                .build();
+
+        return ItemStackElement.of(item, this::renameClick);
     }
 
     private void renameClick(final ClickContext<ChestPane, InventoryClickEvent, PlayerViewer> context) {
