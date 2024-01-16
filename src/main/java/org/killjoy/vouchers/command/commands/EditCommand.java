@@ -12,6 +12,7 @@ import org.killjoy.vouchers.command.Commands;
 import org.killjoy.vouchers.command.argument.factory.CloudArgumentFactory;
 import org.killjoy.vouchers.menu.MenuFactory;
 import org.killjoy.vouchers.util.Permissions;
+import org.killjoy.vouchers.voucher.Voucher;
 
 @DefaultQualifier(NonNull.class)
 public final class EditCommand extends BaseCommand {
@@ -38,6 +39,9 @@ public final class EditCommand extends BaseCommand {
     }
 
     private void execute(final CommandContext<CommandSender> context) {
-        menuFactory.editMenu(context.get("voucher")).open((Player) context.getSender());
+        Player player = (Player) context.getSender();
+        Voucher voucher = context.get("voucher");
+
+        menuFactory.editMenu(voucher).open(player);
     }
 }
