@@ -20,6 +20,8 @@ dependencies {
 
     implementation("org.spongepowered", "configurate-gson", "4.1.2")
 
+    implementation("org.incendo.interfaces", "interfaces-paper" ,"1.0.0-SNAPSHOT")
+
 }
 
 tasks {

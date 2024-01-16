@@ -1,7 +1,7 @@
 package org.killjoy.vouchers.language;
 
 public enum LangKey {
-
+    EDIT_MENU_TITLE("edit-menu.title")
     ;
 
     private final String key;
