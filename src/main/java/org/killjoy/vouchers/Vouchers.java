@@ -9,7 +9,7 @@ import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.incendo.interfaces.paper.PaperInterfaceListeners;
 import org.killjoy.vouchers.command.Commands;
 import org.killjoy.vouchers.inject.CommandModule;
-import org.killjoy.vouchers.inject.MenuModule;
+import org.killjoy.vouchers.inject.FactoryModule;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
 import org.killjoy.vouchers.listener.RenameListener;
@@ -31,7 +31,7 @@ public final class Vouchers extends JavaPlugin implements Listener {
                     new PluginModule(this),
                     new SingletonModule(),
                     new CommandModule(),
-                    new MenuModule()
+                    new FactoryModule()
             );
         } catch (final Exception ex) {
             getSLF4JLogger().error("An error occurred while creating the Guice injector.");

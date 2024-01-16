@@ -29,4 +29,8 @@ public final class VoucherRegistry {
     public Collection<Voucher> all() {
         return Collections.unmodifiableCollection(this.vouchers.values());
     }
+
+    public Collection<String> keys() {
+        return Collections.unmodifiableCollection(this.vouchers.keySet());
+    }
 }
