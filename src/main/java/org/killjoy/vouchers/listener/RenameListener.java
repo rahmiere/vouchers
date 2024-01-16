@@ -14,7 +14,6 @@ import org.killjoy.vouchers.util.MessageParser;
 import org.killjoy.vouchers.voucher.Voucher;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
