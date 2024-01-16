@@ -6,6 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.killjoy.vouchers.Vouchers;
+import org.slf4j.Logger;
 import org.spongepowered.configurate.BasicConfigurationNode;
 import org.spongepowered.configurate.ConfigurateException;
 import org.spongepowered.configurate.gson.GsonConfigurationLoader;
@@ -20,11 +21,13 @@ public final class VoucherManager {
     private final VoucherRegistry registry;
 
     private final GsonConfigurationLoader loader;
+    private final Logger logger;
 
     @Inject
-    public VoucherManager(@Named("dataFolder") Path dataFolder, Vouchers plugin, VoucherRegistry registry) {
+    public VoucherManager(@Named("dataFolder") Path dataFolder, Vouchers plugin, VoucherRegistry registry, Logger logger) {
         this.plugin = plugin;
         this.registry = registry;
+        this.logger = logger;
 
         this.loader = build(dataFolder.resolve("vouchers.json"));
     }
@@ -41,6 +44,32 @@ public final class VoucherManager {
                 registry.register(voucher);
             }
         }
+    }
+
+    public void save() {
+        for (Voucher voucher : registry.all()) {
+            if (voucher.isDirty()) {
+                this.save(voucher);
+            }
+        }
+    }
+
+    public void save(Voucher voucher) {
+        try {
+            voucher.setDirty(false);
+            this.saveVoucher(voucher);
+        } catch (ConfigurateException ex) {
+            logger.error(String.format("Failed to save %s", voucher.getKey()), ex);
+        }
+    }
+
+    private void saveVoucher(Voucher voucher) throws ConfigurateException {
+        var root = loader.load();
+
+        BasicConfigurationNode node = root.node(voucher.getKey());
+        node.set(Voucher.class, voucher);
+
+        loader.save(root);
     }
 
     private GsonConfigurationLoader build(final Path source) {

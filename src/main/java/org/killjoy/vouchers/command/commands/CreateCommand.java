@@ -16,20 +16,33 @@ import org.killjoy.vouchers.language.LangKey;
 import org.killjoy.vouchers.language.Language;
 import org.killjoy.vouchers.menu.MenuFactory;
 import org.killjoy.vouchers.voucher.Voucher;
+import org.killjoy.vouchers.voucher.VoucherManager;
 import org.killjoy.vouchers.voucher.VoucherRegistry;
 
 public class CreateCommand extends BaseCommand {
 
-    private final Language language;
-    private final VoucherRegistry registry;
-    private final MenuFactory menuFactory;
     private final Vouchers plugin;
 
+    private final Language language;
+
+    private final VoucherRegistry registry;
+    private final VoucherManager manager;
+
+    private final MenuFactory menuFactory;
+
     @Inject
-    protected CreateCommand(Commands commands, Language language, VoucherRegistry registry, MenuFactory menuFactory, Vouchers plugin) {
+    protected CreateCommand(
+            Commands commands,
+            Language language,
+            VoucherRegistry registry,
+            VoucherManager manager,
+            MenuFactory menuFactory,
+            Vouchers plugin
+    ) {
         super(commands);
         this.language = language;
         this.registry = registry;
+        this.manager = manager;
         this.menuFactory = menuFactory;
         this.plugin = plugin;
     }
@@ -65,7 +78,13 @@ public class CreateCommand extends BaseCommand {
 
         registry.register(voucher);
 
-        // TODO: save voucher
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                manager.save(voucher);
+            }
+        }.runTaskAsynchronously(this.plugin);
+
         menuFactory.editMenu(voucher).open(player);
     }
 }

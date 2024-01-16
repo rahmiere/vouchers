@@ -54,4 +54,11 @@ public final class Vouchers extends JavaPlugin implements Listener {
         Commands commands = injector.getInstance(Commands.class);
         commands.registerCommands();
     }
+
+    @Override
+    public void onDisable() {
+        VoucherManager manager = injector.getInstance(VoucherManager.class);
+
+        manager.save();
+    }
 }

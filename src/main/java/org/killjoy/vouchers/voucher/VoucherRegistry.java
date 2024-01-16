@@ -3,9 +3,7 @@ package org.killjoy.vouchers.voucher;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @DefaultQualifier(NonNull.class)
 public final class VoucherRegistry {
@@ -26,5 +24,9 @@ public final class VoucherRegistry {
 
     public int size() {
         return this.vouchers.size();
+    }
+
+    public Collection<Voucher> all() {
+        return Collections.unmodifiableCollection(this.vouchers.values());
     }
 }
