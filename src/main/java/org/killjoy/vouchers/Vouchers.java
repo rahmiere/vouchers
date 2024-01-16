@@ -45,7 +45,6 @@ public final class Vouchers extends JavaPlugin implements Listener {
         PaperInterfaceListeners.install(this);
 
         VoucherManager manager = injector.getInstance(VoucherManager.class);
-
         try {
             manager.load();
         } catch (final ConfigurateException ex) {
@@ -74,7 +73,6 @@ public final class Vouchers extends JavaPlugin implements Listener {
     @Override
     public void onDisable() {
         VoucherManager manager = injector.getInstance(VoucherManager.class);
-
         manager.save();
     }
 }
