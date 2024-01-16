@@ -54,7 +54,7 @@ public final class Language {
         if (root == null) {
             raw = "<red>Failed to load the language file.";
         } else {
-            raw = root.node(key.get()).getString();
+            raw = key.getValue(root);
         }
 
         if (raw == null) {

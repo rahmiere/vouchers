@@ -1,16 +1,23 @@
 package org.killjoy.vouchers.language;
 
+import org.spongepowered.configurate.ConfigurationNode;
+import org.spongepowered.configurate.NodePath;
+
 public enum LangKey {
     EDIT_MENU_TITLE("edit-menu.title")
     ;
 
-    private final String key;
+    private final NodePath path;
 
-    LangKey(String key) {
-        this.key = key;
+    LangKey(String path) {
+        this.path = NodePath.of(path.split("\\."));
     }
 
     public String get() {
-        return key;
+        return path.toString();
+    }
+
+    public String getValue(ConfigurationNode node) {
+        return node.node(path).getString();
     }
 }
