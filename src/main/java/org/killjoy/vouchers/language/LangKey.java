@@ -13,10 +13,6 @@ public enum LangKey {
         this.path = NodePath.of(path.split("\\."));
     }
 
-    public String get() {
-        return path.toString();
-    }
-
     public String getValue(ConfigurationNode node) {
         return node.node(path).getString();
     }

@@ -2,16 +2,13 @@ package org.killjoy.vouchers;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.incendo.interfaces.paper.PaperInterfaceListeners;
 import org.killjoy.vouchers.inject.MenuModule;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
-import org.killjoy.vouchers.menu.MenuFactory;
 import org.killjoy.vouchers.voucher.VoucherManager;
 import org.killjoy.vouchers.voucher.VoucherRegistry;
 import org.spongepowered.configurate.ConfigurateException;
