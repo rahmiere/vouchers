@@ -9,6 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.killjoy.vouchers.command.commands.CreateCommand;
+import org.killjoy.vouchers.command.commands.EditCommand;
+import org.killjoy.vouchers.command.commands.GiveCommand;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -26,8 +28,11 @@ public final class Commands {
     }
 
     public void registerCommands() {
-        // TODO: permissions
-        final var commands = List.of(CreateCommand.class);
+        final var commands = List.of(
+                CreateCommand.class,
+                EditCommand.class,
+                GiveCommand.class
+        );
 
         for (final var command : commands) {
             injector.getInstance(command).register();

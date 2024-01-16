@@ -9,7 +9,10 @@ public enum LangKey {
     VOUCHER_ALREADY_EXISTS("create-command.voucher-exists"),
 
     RENAME("rename.enter-name"),
-    RENAME_SUCCESS("rename.success")
+    RENAME_SUCCESS("rename.success"),
+
+    GIVE("give.sender"),
+    RECEIVED("give.target")
     ;
 
     private final NodePath path;

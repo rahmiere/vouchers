@@ -15,6 +15,7 @@ import org.killjoy.vouchers.command.Commands;
 import org.killjoy.vouchers.language.LangKey;
 import org.killjoy.vouchers.language.Language;
 import org.killjoy.vouchers.menu.MenuFactory;
+import org.killjoy.vouchers.util.Permissions;
 import org.killjoy.vouchers.voucher.Voucher;
 import org.killjoy.vouchers.voucher.VoucherManager;
 import org.killjoy.vouchers.voucher.VoucherRegistry;
@@ -51,6 +52,7 @@ public class CreateCommand extends BaseCommand {
     public void register() {
         this.commands.subcommand(builder -> builder.literal("create")
                 .meta(CommandMeta.DESCRIPTION, "Creates a new voucher from the item in your hand.")
+                .permission(Permissions.CREATE_COMMAND)
                 .senderType(Player.class)
                 .argument(StringArgument.of("key"))
                 .handler(this::execute)

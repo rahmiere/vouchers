@@ -11,5 +11,10 @@
   "rename": {
     "enter-name": "Please enter the new name of the voucher in chat",
     "success": "You have updated the voucher name to: %name"
+  },
+
+  "give": {
+    "sender": "<green>You have given a</green> %name <gray>(voucher)</gray> <green>to %target!",
+    "target": "<green>You have been given a</green> %name<green>!"
   }
 }
