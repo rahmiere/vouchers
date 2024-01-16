@@ -1,5 +1,10 @@
 {
   "edit-menu": {
     "title": "Edit - %key"
+  },
+
+  "create-command": {
+    "must-hold-item": "<red>You must be holding the voucher item in your hand.",
+    "voucher-exists": "<red>A voucher with this key already exists."
   }
 }
