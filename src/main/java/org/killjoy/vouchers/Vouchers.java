@@ -2,15 +2,20 @@ package org.killjoy.vouchers;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
+import org.killjoy.vouchers.menu.MenuFactory;
+import org.killjoy.vouchers.menu.impl.EditMenu;
 import org.killjoy.vouchers.voucher.VoucherManager;
 import org.killjoy.vouchers.voucher.VoucherRegistry;
 import org.spongepowered.configurate.ConfigurateException;
 
-public final class Vouchers extends JavaPlugin {
+public final class Vouchers extends JavaPlugin implements Listener {
 
     @MonotonicNonNull
     private Injector injector;
@@ -41,5 +46,14 @@ public final class Vouchers extends JavaPlugin {
 
         VoucherRegistry registry = this.injector.getInstance(VoucherRegistry.class);
         getSLF4JLogger().info(String.format("Loaded %s voucher(s) from file.", registry.size()));
+
+        getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        MenuFactory mf = injector.getInstance(MenuFactory.class);
+
+        mf.editMenu().open(event.getPlayer());
     }
 }
