@@ -18,7 +18,8 @@ public final class Vouchers extends JavaPlugin {
     @Override
     public void onLoad() {
         try {
-            this.injector = Guice.createInjector(new PluginModule(this),
+            this.injector = Guice.createInjector(
+                    new PluginModule(this),
                     new SingletonModule()
             );
         } catch (final Exception ex) {
