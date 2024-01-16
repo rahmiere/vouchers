@@ -6,6 +6,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.incendo.interfaces.paper.PaperInterfaceListeners;
+import org.killjoy.vouchers.command.Commands;
+import org.killjoy.vouchers.inject.CommandModule;
 import org.killjoy.vouchers.inject.MenuModule;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
@@ -24,6 +26,7 @@ public final class Vouchers extends JavaPlugin implements Listener {
             this.injector = Guice.createInjector(
                     new PluginModule(this),
                     new SingletonModule(),
+                    new CommandModule(),
                     new MenuModule()
             );
         } catch (final Exception ex) {
@@ -48,6 +51,7 @@ public final class Vouchers extends JavaPlugin implements Listener {
         VoucherRegistry registry = injector.getInstance(VoucherRegistry.class);
         getSLF4JLogger().info(String.format("Loaded %s voucher(s) from file.", registry.size()));
 
-        getServer().getPluginManager().registerEvents(this, this);
+        Commands commands = injector.getInstance(Commands.class);
+        commands.registerCommands();
     }
 }
