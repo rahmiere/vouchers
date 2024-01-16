@@ -11,7 +11,6 @@ import org.killjoy.vouchers.inject.MenuModule;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
 import org.killjoy.vouchers.menu.MenuFactory;
-import org.killjoy.vouchers.menu.impl.EditMenu;
 import org.killjoy.vouchers.voucher.VoucherManager;
 import org.killjoy.vouchers.voucher.VoucherRegistry;
 import org.spongepowered.configurate.ConfigurateException;
