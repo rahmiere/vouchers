@@ -28,7 +28,7 @@ dependencies {
     implementation("org.incendo.interfaces", "interfaces-paper" ,"1.0.0-SNAPSHOT")
 
     implementation("de.tr7zw", "item-nbt-api", "2.12.2")
-    
+
     implementation("broccolai.corn", "corn-minecraft-paper", "3.2.0")
 }
 
@@ -44,6 +44,12 @@ tasks {
     shadowJar {
         archiveBaseName.set("Vouchers")
         archiveClassifier.set("")
+
+        val libsPackage = "${project.group}.${project.name}.libs"
+        relocate("com.google.inject", "$libsPackage.guice")
+        relocate("cloud.commandframework", "$libsPackage.cloud")
+        relocate("org.spongepowered.configurate", "$libsPackage.configurate")
+        relocate("de.tr7zw.changeme.nbtapi", "$libsPackage.nbt")
     }
 
     runServer {
