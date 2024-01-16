@@ -42,7 +42,7 @@ public final class InteractListener implements Listener {
         }
 
         @Nullable ItemStack item = event.getItem();
-        if (item == null) {
+        if (item == null || item.getType() == Material.AIR) {
             return;
         }
 
