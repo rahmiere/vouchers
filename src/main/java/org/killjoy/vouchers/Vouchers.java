@@ -53,12 +53,4 @@ public final class Vouchers extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(this, this);
     }
-
-    // TODO: remove this
-    @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        MenuFactory mf = injector.getInstance(MenuFactory.class);
-
-        mf.editMenu().open(event.getPlayer());
-    }
 }
