@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.killjoy.vouchers.inject.MenuModule;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
 import org.killjoy.vouchers.menu.MenuFactory;
@@ -25,7 +26,8 @@ public final class Vouchers extends JavaPlugin implements Listener {
         try {
             this.injector = Guice.createInjector(
                     new PluginModule(this),
-                    new SingletonModule()
+                    new SingletonModule(),
+                    new MenuModule()
             );
         } catch (final Exception ex) {
             getSLF4JLogger().error("An error occurred while creating the Guice injector.");

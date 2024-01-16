@@ -17,6 +17,7 @@ dependencies {
     compileOnly("io.papermc.paper", "paper-api", "1.20.4-R0.1-SNAPSHOT")
 
     implementation("com.google.inject", "guice", "7.0.0")
+    implementation("com.google.inject.extensions", "guice-assistedinject", "7.0.0")
 
     implementation("org.spongepowered", "configurate-gson", "4.1.2")
 
