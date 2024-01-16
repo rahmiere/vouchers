@@ -12,7 +12,9 @@ public enum LangKey {
     RENAME_SUCCESS("rename.success"),
 
     GIVE("give.sender"),
-    RECEIVED("give.target")
+    RECEIVED("give.target"),
+
+    VOUCHER_DISABLED("voucher.disabled")
     ;
 
     private final NodePath path;

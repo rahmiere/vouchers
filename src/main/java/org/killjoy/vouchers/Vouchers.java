@@ -12,6 +12,7 @@ import org.killjoy.vouchers.inject.CommandModule;
 import org.killjoy.vouchers.inject.FactoryModule;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
+import org.killjoy.vouchers.listener.InteractListener;
 import org.killjoy.vouchers.listener.RenameListener;
 import org.killjoy.vouchers.voucher.VoucherManager;
 import org.killjoy.vouchers.voucher.VoucherRegistry;
@@ -60,7 +61,10 @@ public final class Vouchers extends JavaPlugin implements Listener {
 
         PluginManager pm = getServer().getPluginManager();
 
-        final var listeners = List.of(RenameListener.class);
+        final var listeners = List.of(
+                InteractListener.class,
+                RenameListener.class
+        );
 
         for (final var listener : listeners) {
             pm.registerEvents(injector.getInstance(listener), this);

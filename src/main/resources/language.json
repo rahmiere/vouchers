@@ -16,5 +16,9 @@
   "give": {
     "sender": "<green>You have given a</green> %name <gray>(voucher)</gray> <green>to %target!",
     "target": "<green>You have been given a</green> %name<green>!"
+  },
+
+  "voucher": {
+    "disabled": "<red>This voucher is currently disabled."
   }
 }

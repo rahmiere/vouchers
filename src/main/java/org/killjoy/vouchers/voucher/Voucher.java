@@ -2,6 +2,7 @@ package org.killjoy.vouchers.voucher;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -24,6 +25,8 @@ public final class Voucher {
 
     private String name;
 
+    private boolean disabled;
+
     private transient boolean dirty;
 
     public Voucher() {
@@ -35,6 +38,10 @@ public final class Voucher {
         this.key = key;
         this.type = type;
         this.dirty = true;
+    }
+
+    public void redeem(final @NonNull Player player) {
+        // TODO: redeem code here
     }
 
     public @NonNull ItemStack toItemStack() {
@@ -89,5 +96,13 @@ public final class Voucher {
 
     public void setDirty() {
         this.dirty = true;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }
