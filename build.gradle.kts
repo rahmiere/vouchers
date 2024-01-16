@@ -1,19 +1,37 @@
 plugins {
     id("java")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("xyz.jpenilla.run-paper") version "2.2.2"
 }
 
-group = "org.example"
+group = "org.killjoy"
 version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://papermc.io/repo/repository/maven-public/")
+
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.9.1"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    compileOnly("io.papermc.paper", "paper-api", "1.20.4-R0.1-SNAPSHOT")
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks {
+    assemble {
+        dependsOn(shadowJar)
+    }
+
+    processResources {
+        expand("version" to project.version)
+    }
+
+    shadowJar {
+        archiveBaseName.set("Vouchers")
+        archiveClassifier.set("")
+    }
+
+    runServer {
+        minecraftVersion("1.20.4")
+    }
 }

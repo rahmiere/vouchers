@@ -1,0 +1,4 @@
+name: Vouchers
+version: '${version}'
+main: org.killjoy.vouchers.Vouchers
+api-version: '1.20'
