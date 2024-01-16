@@ -64,14 +64,14 @@ public class CreateCommand extends BaseCommand {
         PlayerInventory inventory = player.getInventory();
 
         if (inventory.getItemInMainHand().getType() == Material.AIR) {
-            player.sendMessage(language.get(LangKey.MUST_HOLD_ITEM));
+            player.sendMessage(language.get(LangKey.HOLD_ITEM));
             return;
         }
 
         String key = context.get("key");
 
         if (registry.get(key).isPresent()) {
-            player.sendMessage(language.get(LangKey.VOUCHER_ALREADY_EXISTS));
+            player.sendMessage(language.get(LangKey.ALREADY_EXISTS));
             return;
         }
 

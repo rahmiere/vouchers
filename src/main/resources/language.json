@@ -1,26 +1,20 @@
 {
-  "edit-menu": {
-    "title": "Edit - %key",
+  "edit-menu-title": "Edit - %key",
 
-    "rename": "<aqua><bold>Rename Voucher"
-  },
+  "voucher-disabled": "<red>This voucher is disabled.",
 
   "create-command": {
-    "must-hold-item": "<red>You must be holding the voucher item in your hand.",
-    "voucher-exists": "<red>A voucher with this key already exists."
+    "hold-item": "<red>YOu must be holding the voucher item in your hand.",
+    "exists": "<red>A voucher with this key already exists."
+  },
+
+  "give-command": {
+    "sender": "<green>You have given a</green> %name <gray>(voucher)</gray> <green>to %target!",
+    "target": "<green>You have been given a</green> %name<green>!"
   },
 
   "rename": {
     "enter-name": "Please enter the new name of the voucher in chat",
     "success": "You have updated the voucher name to: %name"
-  },
-
-  "give": {
-    "sender": "<green>You have given a</green> %name <gray>(voucher)</gray> <green>to %target!",
-    "target": "<green>You have been given a</green> %name<green>!"
-  },
-
-  "voucher": {
-    "disabled": "<red>This voucher is currently disabled."
   }
 }

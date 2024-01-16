@@ -4,18 +4,18 @@ import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.NodePath;
 
 public enum LangKey {
-    EDIT_MENU_TITLE("edit-menu.title"),
-    EDIT_MENU_RENAME("edit-menu.rename"),
-    MUST_HOLD_ITEM("create-command.must-hold-item"),
-    VOUCHER_ALREADY_EXISTS("create-command.voucher-exists"),
+    EDIT_MENU_TITLE("edit-menu-title"),
+
+    HOLD_ITEM("create-command.hold-item"),
+    ALREADY_EXISTS("create-command.exists"),
+
+    GIVE_SENDER("give-command.sender"),
+    GIVE_TARGET("give-command.target"),
 
     RENAME("rename.enter-name"),
     RENAME_SUCCESS("rename.success"),
 
-    GIVE("give.sender"),
-    RECEIVED("give.target"),
-
-    VOUCHER_DISABLED("voucher.disabled")
+    VOUCHER_DISABLED("voucher-disabled")
     ;
 
     private final NodePath path;

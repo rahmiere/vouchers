@@ -49,7 +49,7 @@ public final class GiveCommand extends BaseCommand {
 
         // TODO: amount
 
-        final ItemStack item = voucher.toItemStack();
+        ItemStack item = voucher.toItemStack();
 
         target.getInventory().addItem(item);
 
@@ -58,7 +58,7 @@ public final class GiveCommand extends BaseCommand {
                 "target", target.getName()
         );
 
-        context.getSender().sendMessage(language.get(LangKey.GIVE, placeholders));
-        target.sendMessage(language.get(LangKey.RECEIVED, placeholders));
+        context.getSender().sendMessage(language.get(LangKey.GIVE_SENDER, placeholders));
+        target.sendMessage(language.get(LangKey.GIVE_TARGET, placeholders));
     }
 }

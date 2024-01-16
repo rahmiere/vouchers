@@ -23,8 +23,7 @@ import org.killjoy.vouchers.listener.RenameListener;
 import org.killjoy.vouchers.menu.Menu;
 import org.killjoy.vouchers.voucher.Voucher;
 
-import java.util.Collections;
-
+import static java.util.Collections.singletonMap;
 import static org.incendo.interfaces.paper.transform.PaperTransform.chestItem;
 
 @DefaultQualifier(NonNull.class)
@@ -34,6 +33,12 @@ public final class EditMenu extends Menu {
     private final RenameListener listener;
 
     private final Voucher voucher;
+
+    private static final ItemStack RENAME = PaperItemBuilder.ofType(Material.NAME_TAG)
+            .name(Component.text("Rename Voucher")
+                    .color(NamedTextColor.AQUA)
+                    .decorate(TextDecoration.BOLD))
+            .build();
 
     @Inject
     public EditMenu(Language language, RenameListener listener, @Assisted Voucher voucher) {
@@ -45,7 +50,7 @@ public final class EditMenu extends Menu {
     @Override
     protected ChestInterface build() {
         return ChestInterface.builder()
-                .title(language.get(LangKey.EDIT_MENU_TITLE, Collections.singletonMap("key", voucher.getKey())))
+                .title(language.get(LangKey.EDIT_MENU_TITLE, singletonMap("key", voucher.getKey())))
                 .rows(1)
                 .cancelClicksInPlayerInventory(true)
                 .addTransform(chestItem(this::renameElement, 0, 0))
@@ -53,11 +58,7 @@ public final class EditMenu extends Menu {
     }
 
     private ItemStackElement<ChestPane> renameElement() {
-        final ItemStack item = PaperItemBuilder.ofType(Material.NAME_TAG)
-                .name(language.get(LangKey.EDIT_MENU_RENAME))
-                .build();
-
-        return ItemStackElement.of(item, this::renameClick);
+        return ItemStackElement.of(RENAME, this::renameClick);
     }
 
     private void renameClick(final ClickContext<ChestPane, InventoryClickEvent, PlayerViewer> context) {
