@@ -30,16 +30,16 @@ public final class Vouchers extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        VoucherManager voucherManager = this.injector.getInstance(VoucherManager.class);
+        VoucherManager manager = this.injector.getInstance(VoucherManager.class);
 
         try {
-            voucherManager.load();
+            manager.load();
         } catch (final ConfigurateException ex) {
             getSLF4JLogger().error("Something went wrong while loading the vouchers from file.");
             getSLF4JLogger().error("Please report this stacktrace to the developer: ", ex);
         }
 
-        VoucherRegistry voucherRegistry = this.injector.getInstance(VoucherRegistry.class);
-        getSLF4JLogger().info(String.format("Loaded %s voucher(s) from file.", voucherRegistry.size()));
+        VoucherRegistry registry = this.injector.getInstance(VoucherRegistry.class);
+        getSLF4JLogger().info(String.format("Loaded %s voucher(s) from file.", registry.size()));
     }
 }
