@@ -1,0 +1,30 @@
+package org.killjoy.vouchers.voucher;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.framework.qual.DefaultQualifier;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+@DefaultQualifier(NonNull.class)
+public final class VoucherRegistry {
+
+    private final Map<String, Voucher> vouchers = new HashMap<>();
+
+    public Optional<Voucher> get(final String key) {
+        return Optional.ofNullable(this.vouchers.get(key));
+    }
+
+    public void register(final Voucher voucher) {
+        this.vouchers.put(voucher.getKey(), voucher);
+    }
+
+    public void clean(final Voucher voucher) {
+        this.vouchers.remove(voucher.getKey());
+    }
+
+    public int size() {
+        return this.vouchers.size();
+    }
+}

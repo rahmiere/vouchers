@@ -1,9 +1,13 @@
 package org.killjoy.vouchers.inject;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.google.inject.name.Named;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.killjoy.vouchers.Vouchers;
+
+import java.nio.file.Path;
 
 @DefaultQualifier(NonNull.class)
 public class PluginModule extends AbstractModule {
@@ -17,5 +21,11 @@ public class PluginModule extends AbstractModule {
     @Override
     protected void configure() {
         this.bind(Vouchers.class).toInstance(this.plugin);
+    }
+
+    @Provides
+    @Named("dataFolder")
+    public Path provideDataFolder() {
+        return this.plugin.getDataFolder().toPath();
     }
 }
