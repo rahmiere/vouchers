@@ -6,5 +6,10 @@
   "create-command": {
     "must-hold-item": "<red>You must be holding the voucher item in your hand.",
     "voucher-exists": "<red>A voucher with this key already exists."
+  },
+
+  "rename": {
+    "enter-name": "Please enter the new name of the voucher in chat",
+    "success": "You have updated the voucher name to: %name"
   }
 }

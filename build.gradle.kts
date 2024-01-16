@@ -10,6 +10,8 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
     maven("https://papermc.io/repo/repository/maven-public/")
+    maven("https://repo.broccol.ai/releases/")
+
 
 }
 
@@ -24,6 +26,7 @@ dependencies {
     implementation("cloud.commandframework", "cloud-paper", "1.8.4")
     implementation("org.incendo.interfaces", "interfaces-paper" ,"1.0.0-SNAPSHOT")
 
+    implementation("broccolai.corn", "corn-minecraft-paper", "3.2.0")
 }
 
 tasks {

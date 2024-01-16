@@ -13,10 +13,13 @@ public final class Voucher {
     @Required
     private String type;
 
+    private String name;
+
     private transient boolean dirty;
 
     public Voucher() {
-
+        this.type = "POTATO";
+        this.name = "Unnamed Voucher";
     }
 
     public Voucher(final String key, final String type) {
@@ -36,6 +39,15 @@ public final class Voucher {
     public void setType(String type) {
         setDirty();
         this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        setDirty();
+        this.name = name;
     }
 
     public boolean isDirty() {

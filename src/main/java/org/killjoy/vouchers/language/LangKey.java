@@ -6,7 +6,10 @@ import org.spongepowered.configurate.NodePath;
 public enum LangKey {
     EDIT_MENU_TITLE("edit-menu.title"),
     MUST_HOLD_ITEM("create-command.must-hold-item"),
-    VOUCHER_ALREADY_EXISTS("create-command.voucher-exists")
+    VOUCHER_ALREADY_EXISTS("create-command.voucher-exists"),
+
+    RENAME("rename.enter-name"),
+    RENAME_SUCCESS("rename.success")
     ;
 
     private final NodePath path;

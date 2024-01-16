@@ -3,6 +3,7 @@ package org.killjoy.vouchers;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
 import org.incendo.interfaces.paper.PaperInterfaceListeners;
@@ -11,9 +12,12 @@ import org.killjoy.vouchers.inject.CommandModule;
 import org.killjoy.vouchers.inject.MenuModule;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
+import org.killjoy.vouchers.listener.RenameListener;
 import org.killjoy.vouchers.voucher.VoucherManager;
 import org.killjoy.vouchers.voucher.VoucherRegistry;
 import org.spongepowered.configurate.ConfigurateException;
+
+import java.util.List;
 
 public final class Vouchers extends JavaPlugin implements Listener {
 
@@ -53,6 +57,14 @@ public final class Vouchers extends JavaPlugin implements Listener {
 
         Commands commands = injector.getInstance(Commands.class);
         commands.registerCommands();
+
+        PluginManager pm = getServer().getPluginManager();
+
+        final var listeners = List.of(RenameListener.class);
+
+        for (final var listener : listeners) {
+            pm.registerEvents(injector.getInstance(listener), this);
+        }
     }
 
     @Override
