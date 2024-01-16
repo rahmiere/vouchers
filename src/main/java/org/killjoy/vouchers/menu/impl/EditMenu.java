@@ -1,6 +1,7 @@
 package org.killjoy.vouchers.menu.impl;
 
 import com.google.inject.Inject;
+import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
 import org.incendo.interfaces.paper.type.ChestInterface;

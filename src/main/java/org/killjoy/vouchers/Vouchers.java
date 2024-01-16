@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.incendo.interfaces.paper.PaperInterfaceListeners;
 import org.killjoy.vouchers.inject.MenuModule;
 import org.killjoy.vouchers.inject.PluginModule;
 import org.killjoy.vouchers.inject.SingletonModule;
@@ -36,7 +37,9 @@ public final class Vouchers extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        VoucherManager manager = this.injector.getInstance(VoucherManager.class);
+        PaperInterfaceListeners.install(this);
+
+        VoucherManager manager = injector.getInstance(VoucherManager.class);
 
         try {
             manager.load();
@@ -45,12 +48,13 @@ public final class Vouchers extends JavaPlugin implements Listener {
             getSLF4JLogger().error("Please report this stacktrace to the developer: ", ex);
         }
 
-        VoucherRegistry registry = this.injector.getInstance(VoucherRegistry.class);
+        VoucherRegistry registry = injector.getInstance(VoucherRegistry.class);
         getSLF4JLogger().info(String.format("Loaded %s voucher(s) from file.", registry.size()));
 
         getServer().getPluginManager().registerEvents(this, this);
     }
 
+    // TODO: remove this
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         MenuFactory mf = injector.getInstance(MenuFactory.class);
