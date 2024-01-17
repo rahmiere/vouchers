@@ -25,7 +25,6 @@ import org.killjoy.vouchers.menu.Menu;
 import org.killjoy.vouchers.menu.MenuFactory;
 import org.killjoy.vouchers.voucher.Voucher;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
