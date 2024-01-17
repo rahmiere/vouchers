@@ -1,6 +1,7 @@
 package org.killjoy.vouchers.menu.impl;
 
 import broccolai.corn.paper.item.PaperItemBuilder;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import net.kyori.adventure.text.Component;
@@ -24,9 +25,12 @@ import org.killjoy.vouchers.menu.Menu;
 import org.killjoy.vouchers.menu.MenuFactory;
 import org.killjoy.vouchers.voucher.Voucher;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static java.util.Collections.singletonMap;
+import static net.kyori.adventure.text.Component.text;
 import static org.incendo.interfaces.paper.transform.PaperTransform.chestItem;
 
 @DefaultQualifier(NonNull.class)
@@ -39,27 +43,36 @@ public final class EditMenu extends Menu {
     private final Voucher voucher;
 
     private static final ItemStack RENAME = PaperItemBuilder.ofType(Material.NAME_TAG)
-            .name(Component.text("Rename Voucher")
+            .name(text("Rename Voucher")
                     .color(NamedTextColor.AQUA)
                     .decorate(TextDecoration.BOLD))
+            .lore(List.of(text("Change the display name of the voucher.").color(NamedTextColor.GRAY)))
             .build();
 
     private static final ItemStack EDIT_ITEM = PaperItemBuilder.ofType(Material.NETHER_STAR)
-            .name(Component.text("Edit Item")
+            .name(text("Edit Item")
                     .color(NamedTextColor.AQUA)
                     .decorate(TextDecoration.BOLD))
+            .lore(List.of(text("Change the item that a player receives when this voucher is given to them.")
+                    .color(NamedTextColor.GRAY)))
             .build();
 
     private static final ItemStack TOGGLE_ON = PaperItemBuilder.ofType(Material.GRAY_DYE)
-            .name(Component.text("Enable Voucher")
+            .name(text("Enable Voucher")
                     .color(NamedTextColor.GREEN)
                     .decorate(TextDecoration.BOLD))
+            .lore(List.of(
+                    text("Left-click to enable the voucher to be redeemed.").color(NamedTextColor.GRAY),
+                    text("Warning: Players will be able to redeem this voucher").color(NamedTextColor.GRAY)))
             .build();
 
     private static final ItemStack TOGGLE_OFF = PaperItemBuilder.ofType(Material.LIME_DYE)
-            .name(Component.text("Disable Voucher")
+            .name(text("Disable Voucher")
                     .color(NamedTextColor.RED)
                     .decorate(TextDecoration.BOLD))
+            .lore(List.of(
+                    text("Left-click to disable the voucher.").color(NamedTextColor.GRAY),
+                    text("Warning: Players will no longer be able to redeem this voucher.").color(NamedTextColor.GRAY)))
             .build();
 
     @Inject
