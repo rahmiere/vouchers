@@ -42,8 +42,6 @@ public final class Vouchers extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        PaperInterfaceListeners.install(this);
-
         VoucherManager manager = injector.getInstance(VoucherManager.class);
 
         try {
@@ -69,6 +67,8 @@ public final class Vouchers extends JavaPlugin implements Listener {
         for (final var listener : listeners) {
             pm.registerEvents(injector.getInstance(listener), this);
         }
+
+        PaperInterfaceListeners.install(this);
     }
 
     @Override
