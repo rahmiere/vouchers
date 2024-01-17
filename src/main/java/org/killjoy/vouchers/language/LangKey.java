@@ -10,6 +10,10 @@ public enum LangKey {
 
     ITEM_UPDATED("edit-menu.item.updated"),
 
+    VOUCHER_TOGGLE_ON("edit-menu.toggle.on"),
+    VOUCHER_TOGGLE_OFF("edit-menu.toggle.off"),
+
+
     HOLD_ITEM("create-command.hold-item"),
     ALREADY_EXISTS("create-command.exists"),
 

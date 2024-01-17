@@ -24,6 +24,8 @@ import org.killjoy.vouchers.menu.Menu;
 import org.killjoy.vouchers.menu.MenuFactory;
 import org.killjoy.vouchers.voucher.Voucher;
 
+import java.util.Map;
+
 import static java.util.Collections.singletonMap;
 import static org.incendo.interfaces.paper.transform.PaperTransform.chestItem;
 
@@ -48,6 +50,18 @@ public final class EditMenu extends Menu {
                     .decorate(TextDecoration.BOLD))
             .build();
 
+    private static final ItemStack TOGGLE_ON = PaperItemBuilder.ofType(Material.GRAY_DYE)
+            .name(Component.text("Enable Voucher")
+                    .color(NamedTextColor.GREEN)
+                    .decorate(TextDecoration.BOLD))
+            .build();
+
+    private static final ItemStack TOGGLE_OFF = PaperItemBuilder.ofType(Material.LIME_DYE)
+            .name(Component.text("Disable Voucher")
+                    .color(NamedTextColor.RED)
+                    .decorate(TextDecoration.BOLD))
+            .build();
+
     @Inject
     public EditMenu(Language language, RenameListener listener, MenuFactory menuFactory, @Assisted Voucher voucher) {
         this.language = language;
@@ -62,8 +76,9 @@ public final class EditMenu extends Menu {
                 .title(language.get(LangKey.EDIT_MENU_TITLE, singletonMap("key", voucher.getKey())))
                 .rows(1)
                 .cancelClicksInPlayerInventory(true)
-                .addTransform(chestItem(this::renameElement, 0, 0))
-                .addTransform(chestItem(this::editItemElement, 2, 0))
+                .addTransform(chestItem(this::renameElement, 1, 0))
+                .addTransform(chestItem(this::editItemElement, 3, 0))
+                .addTransform(chestItem(this::toggleElement, 7, 0))
                 .build();
     }
 
@@ -89,5 +104,25 @@ public final class EditMenu extends Menu {
 
         player.closeInventory();
         menuFactory.selectItemMenu(voucher).open(player);
+    }
+
+    private ItemStackElement<ChestPane> toggleElement() {
+        return ItemStackElement.of(voucher.isDisabled() ? TOGGLE_ON : TOGGLE_OFF, this::toggleClick);
+    }
+
+    private void toggleClick(final ClickContext<ChestPane, InventoryClickEvent, PlayerViewer> context) {
+        final Player player = context.viewer().player();
+        final boolean toggle = !voucher.isDisabled();
+
+        voucher.setDisabled(toggle);
+
+        Map<String, Object> placeholders = singletonMap("key", voucher.getKey());
+
+        Component component = toggle ?
+                language.get(LangKey.VOUCHER_TOGGLE_OFF, placeholders) :
+                language.get(LangKey.VOUCHER_TOGGLE_ON, placeholders);
+
+        player.closeInventory();
+        player.sendMessage(component);
     }
 }

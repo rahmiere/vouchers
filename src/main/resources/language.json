@@ -9,6 +9,11 @@
 
     "item": {
       "updated": "You have updated the voucher type to: %type"
+    },
+
+    "toggle": {
+      "on": "You have toggled %key <gray>(voucher)</gray> on.",
+      "off": "You have toggled %key <gray>(voucher)</gray> off."
     }
   },
 
