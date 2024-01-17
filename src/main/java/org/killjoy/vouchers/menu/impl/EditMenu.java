@@ -21,6 +21,7 @@ import org.killjoy.vouchers.language.LangKey;
 import org.killjoy.vouchers.language.Language;
 import org.killjoy.vouchers.listener.RenameListener;
 import org.killjoy.vouchers.menu.Menu;
+import org.killjoy.vouchers.menu.MenuFactory;
 import org.killjoy.vouchers.voucher.Voucher;
 
 import static java.util.Collections.singletonMap;
@@ -31,6 +32,7 @@ public final class EditMenu extends Menu {
 
     private final Language language;
     private final RenameListener listener;
+    private final MenuFactory menuFactory;
 
     private final Voucher voucher;
 
@@ -40,10 +42,17 @@ public final class EditMenu extends Menu {
                     .decorate(TextDecoration.BOLD))
             .build();
 
+    private static final ItemStack EDIT_ITEM = PaperItemBuilder.ofType(Material.NETHER_STAR)
+            .name(Component.text("Edit Item")
+                    .color(NamedTextColor.AQUA)
+                    .decorate(TextDecoration.BOLD))
+            .build();
+
     @Inject
-    public EditMenu(Language language, RenameListener listener, @Assisted Voucher voucher) {
+    public EditMenu(Language language, RenameListener listener, MenuFactory menuFactory, @Assisted Voucher voucher) {
         this.language = language;
         this.listener = listener;
+        this.menuFactory = menuFactory;
         this.voucher = voucher;
     }
 
@@ -54,6 +63,7 @@ public final class EditMenu extends Menu {
                 .rows(1)
                 .cancelClicksInPlayerInventory(true)
                 .addTransform(chestItem(this::renameElement, 0, 0))
+                .addTransform(chestItem(this::editItemElement, 2, 0))
                 .build();
     }
 
@@ -68,5 +78,16 @@ public final class EditMenu extends Menu {
 
         player.sendMessage(language.get(LangKey.RENAME));
         player.closeInventory();
+    }
+
+    private ItemStackElement<ChestPane> editItemElement() {
+        return ItemStackElement.of(EDIT_ITEM, this::editItemClick);
+    }
+
+    private void editItemClick(final ClickContext<ChestPane, InventoryClickEvent, PlayerViewer> context) {
+        final Player player = context.viewer().player();
+
+        player.closeInventory();
+        menuFactory.selectItemMenu(voucher).open(player);
     }
 }

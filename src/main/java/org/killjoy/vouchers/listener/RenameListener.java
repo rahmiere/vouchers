@@ -7,11 +7,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.killjoy.vouchers.Vouchers;
 import org.killjoy.vouchers.language.LangKey;
 import org.killjoy.vouchers.language.Language;
 import org.killjoy.vouchers.util.MessageParser;
 import org.killjoy.vouchers.voucher.Voucher;
+import org.killjoy.vouchers.voucher.VoucherManager;
 
 import java.util.Collections;
 import java.util.Map;
@@ -25,10 +27,13 @@ public final class RenameListener implements Listener {
     private final Vouchers plugin;
     private final Language language;
 
+    private final VoucherManager manager;
+
     @Inject
-    public RenameListener(Vouchers plugin, Language language) {
+    public RenameListener(Vouchers plugin, Language language, VoucherManager manager) {
         this.plugin = plugin;
         this.language = language;
+        this.manager = manager;
     }
 
     @EventHandler
@@ -47,6 +52,13 @@ public final class RenameListener implements Listener {
             voucher.setName(name);
             player.sendMessage(language.get(LangKey.RENAME_SUCCESS, Collections.singletonMap("name", name)));
         });
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                manager.save(voucher);
+            }
+        }.runTaskAsynchronously(this.plugin);
     }
 
     public Map<Player, Voucher> getRenameMap() {
