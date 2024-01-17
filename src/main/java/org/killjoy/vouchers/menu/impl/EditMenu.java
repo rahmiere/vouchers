@@ -111,7 +111,6 @@ public final class EditMenu extends Menu {
     }
 
     private void toggleClick(final ClickContext<ChestPane, InventoryClickEvent, PlayerViewer> context) {
-        final Player player = context.viewer().player();
         final boolean toggle = !voucher.isDisabled();
 
         voucher.setDisabled(toggle);
@@ -121,6 +120,8 @@ public final class EditMenu extends Menu {
         Component component = toggle ?
                 language.get(LangKey.VOUCHER_TOGGLE_OFF, placeholders) :
                 language.get(LangKey.VOUCHER_TOGGLE_ON, placeholders);
+
+        final Player player = context.viewer().player();
 
         player.closeInventory();
         player.sendMessage(component);
