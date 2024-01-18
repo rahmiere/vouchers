@@ -56,8 +56,8 @@ public final class VoucherManager {
 
     public void save(Voucher voucher) {
         try {
-            voucher.setDirty(false);
             this.saveVoucher(voucher);
+            voucher.setDirty(false);
         } catch (ConfigurateException ex) {
             logger.error(String.format("Failed to save %s", voucher.getKey()), ex);
         }
