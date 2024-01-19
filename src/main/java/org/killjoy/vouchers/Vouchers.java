@@ -42,6 +42,7 @@ public final class Vouchers extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        // load vouchers from file
         VoucherManager manager = injector.getInstance(VoucherManager.class);
 
         try {
@@ -54,25 +55,21 @@ public final class Vouchers extends JavaPlugin implements Listener {
         VoucherRegistry registry = injector.getInstance(VoucherRegistry.class);
         getSLF4JLogger().info(String.format("Loaded %s voucher(s) from file.", registry.size()));
 
-        Commands commands = injector.getInstance(Commands.class);
-        commands.registerCommands();
+        // register commands
+        injector.getInstance(Commands.class).register();
+
+        // register listeners
+        PaperInterfaceListeners.install(this);
 
         PluginManager pm = getServer().getPluginManager();
 
-        final var listeners = List.of(
-                InteractListener.class,
-                RenameListener.class
-        );
-
-        for (final var listener : listeners) {
-            pm.registerEvents(injector.getInstance(listener), this);
-        }
-
-        PaperInterfaceListeners.install(this);
+        pm.registerEvents(injector.getInstance(InteractListener.class), this);
+        pm.registerEvents(injector.getInstance(RenameListener.class), this);
     }
 
     @Override
     public void onDisable() {
+        // save any modified vouchers to file
         VoucherManager manager = injector.getInstance(VoucherManager.class);
         manager.save();
     }

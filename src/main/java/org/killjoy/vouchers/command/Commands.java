@@ -27,7 +27,7 @@ public final class Commands {
         this.commandManager = commandManager;
     }
 
-    public void registerCommands() {
+    public void register() {
         final var commands = List.of(
                 CreateCommand.class,
                 EditCommand.class,
